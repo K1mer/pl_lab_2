@@ -24,11 +24,8 @@ export const FileRecord: FC<FileRecordProps> = ({ record }) => {
                 { 
                     !record.isFolder 
                     && <button title = 'Скачать' className = 'download' onClick = { async () => await FileService.downloadFile( record.name ) }/>
-                }
-                { 
-                    record.isFolder 
-                    && <button title = 'Удалить' className = 'remove' onClick = { async () => await FileService.deleteFolder( record.name ) }/>
-                }
+                } 
+                <button title = 'Удалить' className = 'remove' onClick = { async () => await FileService.removeFile( record.name ) }/>
             </div>
         </div>
     );

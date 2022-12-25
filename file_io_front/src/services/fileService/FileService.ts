@@ -78,15 +78,15 @@ export class FileService {
     };
 
     /** 
-     * Функция посылает запрос на удаление папки.
-     * @param folderName - имя выбранной папки.
+     * Функция посылает запрос на удаление папки или файла.
+     * @param fileName - имя выбранного объекта.
      * */
-    static async deleteFolder( folderName: string ): Promise<void> {
+    static async removeFile( fileName: string ): Promise<void> {
         try {
             const responseData = await sendRequest( 
-                server + 'removeFolder', 
+                server + 'removeFile', 
                 'DELETE', 
-                JSON.stringify({ folderName }) 
+                JSON.stringify({ fileName }) 
             );
 
             this._filesChangeReaction( this.files = responseData.files );

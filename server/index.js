@@ -138,13 +138,14 @@ app.post( '/renameFile', ( req, res ) => {
   };
 });
 
-/** Удаление папки. */
-app.delete( '/removeFolder', ( req, res ) => {
+/** Удаление файла или папки. */
+app.delete( '/removeFile', ( req, res ) => {
   try {
-    const folderName = req.body.folderName;
-    const path = currentPath + '\\\\' + folderName;
+    const path = currentPath + req.body.fileName;
 
-    fs.rmdirSync( path );
+    fs.lstatSync( path ).isFile()
+      ? fs.rmSync( path )
+      : fs.rmdirSync( path );
 
     const files = __getFiles( currentPath );
     res.json({
